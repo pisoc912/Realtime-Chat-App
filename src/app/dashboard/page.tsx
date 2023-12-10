@@ -1,12 +1,15 @@
-import { FunctionComponent } from "react";
-import Button from "../components/Button";
+import Button from "@/components/Button";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import { FC } from "react";
 
 interface pageProps {}
 
-const page: FunctionComponent<pageProps> = () => {
+const page: FC<pageProps> = async () => {
+  const session = await getServerSession(authOptions);
   return (
     <div>
-      <Button />
+      <Button variant="ghost">hello,{JSON.stringify(session)}</Button>
     </div>
   );
 };
