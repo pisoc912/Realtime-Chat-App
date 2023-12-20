@@ -9,7 +9,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FC, ReactElement, ReactNode } from "react";
-import ChatPage from "./chat/page";
 import { getFriendsByUserId } from "@/helper/get-friends-by-user-id";
 import SidebarChatList from "@/components/SidebarChatList";
 
@@ -111,7 +110,7 @@ const Layout: FC<LayoutProps> = async ({ children }) => {
           </li>
         </nav>
       </div>
-      {children}
+      <aside className="max-h-screen container py-16 md:py-12">{children}</aside>
     </div>
   );
 };
