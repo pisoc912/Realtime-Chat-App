@@ -15,12 +15,12 @@ const RequestsPage: FC<RequestsPageProps> = async() => {
     const incomingSenderId = await fetchRedis('smembers',`user:${session.user.id}:incoming_friend_requests`)as string[]
     const incomingFriendRequests = await Promise.all(
         incomingSenderId.map(async(senderId)=>{
-            const sender = await fetchRedis('get',`user:${senderId}`) as User
-            const senderEmail = JSON.parse(sender).email
+            const sender = await fetchRedis('get',`user:${senderId}`) as string
+            const senderParsed = JSON.parse(sender) as User;
     
             return {
               senderId,
-              senderEmail: senderEmail,
+              senderEmail: senderParsed.email,
             };
         })
     )

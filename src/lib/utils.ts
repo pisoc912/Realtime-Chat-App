@@ -1,4 +1,4 @@
-export function mergeClassNames(...classes) {
+export function mergeClassNames(...classes: any[]) {
   const uniqueClasses = new Set(); // 使用 Set 来避免重复的类名
 
   classes.forEach((className) => {
@@ -7,13 +7,13 @@ export function mergeClassNames(...classes) {
     } else if (typeof className === "object" && className !== null) {
       Object.keys(className).forEach((key) => {
         if (className[key]) {
-          uniqueClasses.add(key); // 如果条件为真，添加类名
+          uniqueClasses.add(key); 
         }
       });
     }
   });
 
-  return Array.from(uniqueClasses).join(" "); // 将 Set 转换为字符串
+  return Array.from(uniqueClasses).join(" "); // trans set to arrayy
 }
 
 export function toPusherKey(key: string) {

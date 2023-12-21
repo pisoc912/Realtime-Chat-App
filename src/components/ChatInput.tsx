@@ -1,6 +1,6 @@
 "use client";
 import { TextareaAutosize } from "@mui/material";
-import { FC, useRef, useState } from "react";
+import { FC, KeyboardEvent, useRef, useState } from "react";
 import Button from "./Button";
 import axios from "axios";
 import { resolve } from "path";
@@ -13,9 +13,10 @@ interface ChatInputProps {
 const ChatInput: FC<ChatInputProps> = ({ chatPartner,chatId }) => {
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const sendMessage = async() => {
+    if(!input)return
     setIsLoading(true)
     try {
         await axios.post('/api/message/send',{text:input,chatId})
@@ -38,7 +39,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner,chatId }) => {
               sendMessage();
             }
           }}
-          rows={1}
+          minRows={1}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={`Message ${chatPartner.name}`}
